@@ -4,6 +4,7 @@ from .database import Base
 
 __all__ = ["TrackEntry", "Base"]
 
+
 class TrackEntry(Base):
     __tablename__ = "tracks"
 

@@ -1,4 +1,4 @@
-from typing import List, Optional, Generator
+from typing import Generator, List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session, sessionmaker
@@ -40,5 +40,7 @@ def read_user(category: str, db: Session = Depends(get_db)) -> List[models.Track
 
 
 @app.post("/entries/", response_model=schemas.TrackEntry)
-def create_entry(track_entry: schemas.TrackEntryCreate, db: Session = Depends(get_db)) -> models.TrackEntry:
+def create_entry(
+    track_entry: schemas.TrackEntryCreate, db: Session = Depends(get_db)
+) -> models.TrackEntry:
     return crud.create_track_entry(db=db, track_entry_create=track_entry)

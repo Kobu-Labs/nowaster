@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 from typing import List, Optional
 
-from sqlalchemy.orm import Session
 import sqlalchemy
+from sqlalchemy.orm import Session
+
 from . import models, schemas
 
 
