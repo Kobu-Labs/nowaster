@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, DateTime, Integer, String
 
 from .database import Base
+
 
 class TrackEntry(Base):
     __tablename__ = "tracks"
@@ -11,4 +12,3 @@ class TrackEntry(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     description = Column(String)
-
