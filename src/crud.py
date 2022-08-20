@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from typing import List, Optional
 
-import sqlalchemy
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -46,3 +45,11 @@ def create_track_entry(
     db.commit()
     db.refresh(track_entry)
     return track_entry
+
+
+def abort_active(db: Session) -> None:
+    db.query(models.TrackEntry).filter(
+        models.TrackEntry.start_date <= datetime.now(),
+        datetime.now() <= models.TrackEntry.end_date,
+    ).delete()
+    db.commit()

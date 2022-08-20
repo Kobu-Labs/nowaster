@@ -44,3 +44,8 @@ def create_entry(
     track_entry: schemas.TrackEntryCreate, db: Session = Depends(get_db)
 ) -> models.TrackEntry:
     return crud.create_track_entry(db=db, track_entry_create=track_entry)
+
+
+@app.delete("/active/", response_model=schemas.TrackEntry)
+def abort_active(db: Session = Depends(get_db)) -> None:
+    crud.abort_active(db=db)
