@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
@@ -19,10 +19,17 @@ def get_db():
     finally:
         db.close()
 
+
+@app.get("/entries/active")
+def get_active(db: Session = Depends(get_db)) -> Optional[schemas.TrackEntry]:
+    return crud.get_active(db)
+
+
 @app.get("/entries/", response_model=List[schemas.TrackEntry])
 def read_users(db: Session = Depends(get_db)):
     users = crud.get_track_entries(db)
     return users
+
 
 @app.get("/entries/{category}", response_model=List[schemas.TrackEntry])
 def read_user(category: str, db: Session = Depends(get_db)):
@@ -31,7 +38,7 @@ def read_user(category: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No entries with given category")
     return entries
 
+
 @app.post("/entries/", response_model=schemas.TrackEntry)
 def create_entry(track_entry: schemas.TrackEntryCreate, db: Session = Depends(get_db)):
-    return crud.create_track_entry(db=db, track_entry_create=track_entry) 
-
+    return crud.create_track_entry(db=db, track_entry_create=track_entry)
