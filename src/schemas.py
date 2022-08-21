@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 class TrackEntryBase(BaseModel):
     category: str
-    duration: int
+    duration: float
     description: Optional[str] = None
 
 
