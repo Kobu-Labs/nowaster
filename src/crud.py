@@ -1,9 +1,8 @@
+from . import models, schemas
 from datetime import datetime, timedelta
 from typing import List, Optional
 
 from sqlalchemy.orm import Session
-
-from . import models, schemas
 
 
 def get_active(db: Session) -> Optional[models.TrackEntry]:
