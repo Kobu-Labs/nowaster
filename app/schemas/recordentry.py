@@ -4,20 +4,18 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TrackEntryBase(BaseModel):
+class RecordEntryBase(BaseModel):
     category: str
-    duration: float
     description: Optional[str] = None
 
 
-class TrackEntryCreate(TrackEntryBase):
+class CreateRecordEntry(RecordEntryBase):
     ...
 
 
-class TrackEntry(TrackEntryBase):
+class RecordEntryInDb(RecordEntryBase):
     id: int
     start_date: datetime
-    end_date: datetime
 
     class Config:
         orm_mode = True

@@ -1,11 +1,9 @@
 from sqlalchemy import Column, DateTime, Float, Integer, String
 
-from .database import Base
-
-__all__ = ["TrackEntry", "Base"]
+from app.db import Base
 
 
-class TrackEntry(Base):
+class SolidEntry(Base):
     __tablename__ = "tracks"
 
     id = Column(Integer, primary_key=True, index=True)
