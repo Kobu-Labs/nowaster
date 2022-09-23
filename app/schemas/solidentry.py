@@ -6,7 +6,8 @@ from pydantic import BaseModel
 
 class EntryBase(BaseModel):
     category: str
-    duration: float
+    start_date: datetime
+    end_date: datetime
     description: Optional[str] = None
 
 
@@ -14,10 +15,8 @@ class SolidEntryCreate(EntryBase):
     ...
 
 
-class SolidEntry(EntryBase):
-    id: int
-    start_date: datetime
-    end_date: datetime
-
+class SolidEntryInDb(EntryBase):
     class Config:
         orm_mode = True
+
+    id: int

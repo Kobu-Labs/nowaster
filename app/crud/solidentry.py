@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import List, Optional
 
 from sqlalchemy.orm import Session
@@ -18,25 +18,20 @@ def get_active(db: Session) -> Optional[SolidEntry]:
     )
 
 
-def get_track_entry_by_id(db: Session, track_id: int) -> Optional[SolidEntry]:
+def get_by_id(db: Session, track_id: int) -> Optional[SolidEntry]:
     return db.query(SolidEntry).filter(SolidEntry.id == track_id).first()
 
 
-def get_track_entries_by_category(db: Session, category: str) -> List[SolidEntry]:
+def get_all_by_category(db: Session, category: str) -> List[SolidEntry]:
     return db.query(SolidEntry).filter(SolidEntry.category == category).all()
 
 
-def get_track_entries(db: Session) -> List[SolidEntry]:
+def get_all(db: Session) -> List[SolidEntry]:
     return db.query(SolidEntry).all()
 
 
-def create_track_entry(db: Session, track_entry_create: SolidEntryCreate) -> SolidEntry:
-    print(track_entry_create)
-    start_date = datetime.now()
-    end_date = datetime.now() + timedelta(minutes=track_entry_create.duration)
-    track_entry = SolidEntry(
-        **track_entry_create.dict(), start_date=start_date, end_date=end_date
-    )
+def create(db: Session, entry: SolidEntryCreate) -> SolidEntry:
+    track_entry = SolidEntry(**entry.dict())
     db.add(track_entry)
     db.commit()
     db.refresh(track_entry)
