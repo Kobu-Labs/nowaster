@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.crud import solidentry as crud
 from app.deps import get_db
-from app.models.solidentry import SolidEntry 
-from app.schemas.solidentry import SolidEntryInDb, SolidEntryCreate
+from app.models.solidentry import SolidEntry
+from app.schemas.solidentry import SolidEntryCreate, SolidEntryInDb
 
 router = APIRouter()
 

@@ -6,7 +6,9 @@ from sqlalchemy.orm import Session
 from app.crud import recordentry as crud
 from app.deps import get_db
 from app.models.recordentry import RecordEntry
+from app.models.solidentry import SolidEntry
 from app.schemas.recordentry import CreateRecordEntry, RecordEntryInDb
+from app.schemas.solidentry import SolidEntryInDb
 
 router = APIRouter()
 
@@ -23,6 +25,6 @@ def get_active_timed(db: Session = Depends(get_db)) -> List[RecordEntry]:
     return crud.get_active_timed(db)
 
 
-# @router.post("/timed/{entry_id}", response_model = RecordEntry)
-# def finish_timed_entry(entry_id: int, db: Session = Depends(get_db)) -> None:
-#     return crud.finish_timed_entry(db, entry_id)
+@router.post("/timed/finish", response_model=SolidEntryInDb)
+def finish_timed_entry(db: Session = Depends(get_db)) -> SolidEntry:
+    return crud.finish_timed_entry(db)

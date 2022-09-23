@@ -14,8 +14,8 @@ class CreateRecordEntry(RecordEntryBase):
 
 
 class RecordEntryInDb(RecordEntryBase):
-    id: int
-    start_date: datetime
-
     class Config:
         orm_mode = True
+
+    id: int
+    start_date: datetime
