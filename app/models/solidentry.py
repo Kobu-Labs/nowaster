@@ -1,16 +1,13 @@
-from sqlalchemy import Column, DateTime, Float, Integer, String
+from sqlalchemy import Column, DateTime, Integer, String
 
-from .database import Base
-
-__all__ = ["TrackEntry", "Base"]
+from app.db import Base
 
 
-class TrackEntry(Base):
-    __tablename__ = "tracks"
+class SolidEntry(Base):
+    __tablename__ = "SolidEntry"
 
     id = Column(Integer, primary_key=True, index=True)
     category = Column(String, nullable=False)
-    duration = Column(Float, nullable=False)
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     description = Column(String)
