@@ -13,18 +13,18 @@ from app.schemas.solidentry import SolidEntryInDb
 router = APIRouter()
 
 
-@router.post("/timed/", response_model=RecordEntryInDb)
-def create_timed_entry(
+@router.post("/entry/record/", response_model=RecordEntryInDb)
+def create_new_entry(
     entry_schema: CreateRecordEntry, db: Session = Depends(get_db)
 ) -> RecordEntry:
-    return crud.create_timed_entry(db=db, entry_schema=entry_schema)
+    return crud.create_new_entry(db=db, entry_schema=entry_schema)
 
 
-@router.get("/timed/active", response_model=List[RecordEntryInDb])
-def get_active_timed(db: Session = Depends(get_db)) -> List[RecordEntry]:
-    return crud.get_active_timed(db)
+@router.get("/entry/record/active", response_model=List[RecordEntryInDb])
+def get_active_entry(db: Session = Depends(get_db)) -> List[RecordEntry]:
+    return crud.get_active_entry(db)
 
 
-@router.post("/timed/finish", response_model=SolidEntryInDb)
-def finish_timed_entry(db: Session = Depends(get_db)) -> SolidEntry:
-    return crud.finish_timed_entry(db)
+@router.post("/entry/record/finish", response_model=SolidEntryInDb)
+def finish_entry(db: Session = Depends(get_db)) -> SolidEntry:
+    return crud.finish_entry(db)
