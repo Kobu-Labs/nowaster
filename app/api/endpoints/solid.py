@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends
@@ -12,8 +13,8 @@ router = APIRouter()
 
 
 @router.get("/entry/solid/active")
-def get_active_entry(db: Session = Depends(get_db)) -> Optional[SolidEntry]:
-    return crud.get_active_entry(db)
+def get_active_entry(local_time: datetime, db: Session = Depends(get_db)) -> Optional[SolidEntry]:
+    return crud.get_active_entry(db, local_time)
 
 
 @router.get("/entry/solid", response_model=List[SolidEntryInDb])
