@@ -7,11 +7,11 @@ from app.models.solidentry import SolidEntry
 from app.schemas.solidentry import SolidEntryCreate
 
 
-def get_active_entry(db: Session) -> Optional[SolidEntry]:
+def get_active_entry(db: Session, local_time: datetime) -> Optional[SolidEntry]:
     return (
         db.query(SolidEntry)
         .filter(
-            SolidEntry.start_date <= datetime.now(),
+            SolidEntry.start_date <= local_time,
             datetime.now() <= SolidEntry.end_date,
         )
         .first()
