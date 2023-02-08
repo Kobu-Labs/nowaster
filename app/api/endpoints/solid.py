@@ -13,7 +13,9 @@ router = APIRouter()
 
 
 @router.get("/entry/solid/active")
-def get_active_entry(local_time: datetime, db: Session = Depends(get_db)) -> Optional[SolidEntry]:
+def get_active_entry(
+    local_time: datetime, db: Session = Depends(get_db)
+) -> Optional[SolidEntry]:
     return crud.get_active_entry(db, local_time)
 
 
