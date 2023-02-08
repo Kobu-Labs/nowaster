@@ -1,12 +1,14 @@
 from collections.abc import Callable
 from typing import Optional
+
 from fastapi import APIRouter, FastAPI
 from sqlalchemy import create_engine
-from starlette.types import Scope, Receive, Send
+from starlette.types import Receive, Scope, Send
 
 from app.api.api import api_router
-from app.db import SessionLocal, Base
+from app.db import Base, SessionLocal
 from config import settings
+
 
 class Nowaster:
     __root_router = APIRouter()
