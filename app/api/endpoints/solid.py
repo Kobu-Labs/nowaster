@@ -34,3 +34,9 @@ def create_new_entry(
 @router.delete("/entry/solid", response_model=SolidEntryInDb)
 def delete_active_entry(db: Session = Depends(get_db)) -> None:
     crud.delete_active_entry(db=db)
+
+
+@router.post("/entry/solid/import")
+def import_entries(entries: List[SolidEntryCreate], db: Session = Depends(get_db)) -> None:
+    crud.import_entries(db, entries)
+    
