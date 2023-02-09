@@ -36,3 +36,9 @@ def delete_active_entry(db: Session) -> None:
         datetime.now() <= SolidEntry.end_date,
     ).delete()
     db.commit()
+
+
+def import_entries(db: Session, entries: List[SolidEntryCreate]) -> None:
+    parsed_entries = [SolidEntry(**e.dict()) for e in entries]
+    db.add_all(parsed_entries)
+    db.commit()
