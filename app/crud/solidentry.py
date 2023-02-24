@@ -12,7 +12,7 @@ def get_active_entry(db: Session, local_time: datetime) -> Optional[SolidEntry]:
         db.query(SolidEntry)
         .filter(
             SolidEntry.start_date <= local_time,
-            datetime.now() <= SolidEntry.end_date,
+            local_time <= SolidEntry.end_date,
         )
         .first()
     )
